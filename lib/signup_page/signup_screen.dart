@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -10,6 +11,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vhr_project/service/global-variable.dart';
 import 'package:vhr_project/service/global_methods.dart';
 
@@ -153,6 +155,7 @@ class _SignUpState extends State<SignUp> with TickerProviderStateMixin {
   }
 
   void _submitFormOnSignUp() async {
+    final SharedPreferences shareRef = await SharedPreferences.getInstance();
     final isValid = _signUpFormKey.currentState!.validate();
     if (isValid) {
       if (imageFile == null) {
@@ -172,18 +175,22 @@ class _SignUpState extends State<SignUp> with TickerProviderStateMixin {
         );
         final User? user = _auth.currentUser;
         final _uid = user!.uid;
-        final ref = FirebaseStorage.instance.ref().child('userImage').child(_uid + '.jpg');
+        final ref = FirebaseStorage.instance.ref().child('userImages').child(_uid + '.jpg');
         await ref.putFile(imageFile!);
         imageUrl = await ref.getDownloadURL();
-        FirebaseFirestore.instance.collection('user').doc('_uid').set({
+        final dataUser = {
           'id': _uid,
           'name': _fullNameController.text,
           'email': _emailTextController.text,
           'userImage': imageUrl,
           ' phoneNumber': _phoneNumberController.text,
-          'location': _locationController.text,
+          'location': _locationController.text
+        };
+        FirebaseFirestore.instance.collection('users').doc().set({
+          ...dataUser,
           'createdAt': Timestamp.now(),
         });
+        shareRef.setString('users', jsonEncode(dataUser));
         Navigator.canPop(context) ? Navigator.pop(context) : null;
       } catch (error) {
         setState(() {
