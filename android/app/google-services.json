@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "801197961896",
+    "project_id": "vhrproject-35e59",
+    "storage_bucket": "vhrproject-35e59.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:801197961896:android:24ab92ab3f80b2a4cbc89d",
+        "android_client_info": {
+          "package_name": "i4_internship.vhr_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "801197961896-hlku7mk7j5koe5vhqjcqcf66nsdasvj4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSa7syV_iBZEnDXOO0txKl8_gBoVx4HUg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "801197961896-hlku7mk7j5koe5vhqjcqcf66nsdasvj4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "801197961896-4ebf78rkacs51odub2se0cc3q01n6duf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.vhrProject"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
