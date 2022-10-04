@@ -136,6 +136,33 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                             ),
                           ),
                         ),
+                        SizedBox(height: 20),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Container(
+                              height: 60,
+                              width: 60,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  width: 3,
+                                  color: Colors.grey,
+                                ),
+                                shape: BoxShape.rectangle,
+                                image: DecorationImage(
+                                  image: NetworkImage(
+                                    userImageUrl == null
+                                    ?
+                                    'https://www.iconfinder.com/icons/2147887/avatar_photo_profile_user_icon'
+                                    :
+                                    userImageUrl!,
+                                  ),
+                                  fit: BoxFit.fill
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ],
                     ),
                   ),
