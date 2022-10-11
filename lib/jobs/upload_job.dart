@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -243,16 +244,8 @@ class _UploadJobNowState extends State<UploadJobNow> {
   }
 
   void getMyData() async {
-    final SharedPreferences shareRef = await SharedPreferences.getInstance();
-    var userData = shareRef.getString('users');
-    print(['userData', userData]);
-    // userData = jsonDecode(userData!);
-
     final DocumentSnapshot userDoc =
-        await FirebaseFirestore.instance.collection('users').doc(userData).get();
-
-    // print(FirebaseAuth.instance.currentUser!.uid.toString());
-    // print(userDoc.get("userImage").toString());
+        await FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser!.uid).get();
     setState(() {
       name = userDoc.get('name');
       userImage = userDoc.get('userImage');

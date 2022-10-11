@@ -75,6 +75,23 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
     getJobData();
   }
 
+  Widget dividerWidget() {
+    return Column(
+      children: const [
+        SizedBox(
+          height: 10,
+        ),
+        Divider(
+          thickness: 1,
+          color: Colors.grey,
+        ),
+        SizedBox(
+          height: 10,
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -136,7 +153,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                             ),
                           ),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
@@ -150,16 +167,68 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                                 ),
                                 shape: BoxShape.rectangle,
                                 image: DecorationImage(
-                                  image: NetworkImage(
-                                    userImageUrl == null
-                                    ?
-                                    'https://www.iconfinder.com/icons/2147887/avatar_photo_profile_user_icon'
-                                    :
-                                    userImageUrl!,
-                                  ),
-                                  fit: BoxFit.fill
-                                ),
+                                    image: NetworkImage(
+                                      userImageUrl == null
+                                          ? 'https://www.iconfinder.com/icons/2147887/avatar_photo_profile_user_icon'
+                                          : userImageUrl!,
+                                    ),
+                                    fit: BoxFit.fill),
                               ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    authorName == null ? '' : authorName!,
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                    locationCompany!,
+                                    style: const TextStyle(
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        dividerWidget(),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              applicants.toString(),
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 6,
+                            ),
+                            const Text(
+                              'Applicants',
+                              style: TextStyle(
+                                color: Colors.grey,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 6,
+                            ),
+                            const Icon(
+                              Icons.how_to_reg_sharp,
+                              color: Colors.grey,
                             ),
                           ],
                         ),

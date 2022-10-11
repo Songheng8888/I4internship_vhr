@@ -186,7 +186,7 @@ class _SignUpState extends State<SignUp> with TickerProviderStateMixin {
           ' phoneNumber': _phoneNumberController.text,
           'location': _locationController.text
         };
-        FirebaseFirestore.instance.collection('users').doc().set({
+        FirebaseFirestore.instance.collection('users').doc(_uid).set({
           ...dataUser,
           'createdAt': Timestamp.now(),
         });
