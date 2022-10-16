@@ -23,6 +23,8 @@ class JobDetailsScreen extends StatefulWidget {
 
 class _JobDetailsScreenState extends State<JobDetailsScreen> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final TextEditingController _commentController = TextEditingController();
+  bool _isCommenting = false;
 
   String? authorName;
   String? userImageUrl;
@@ -136,7 +138,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
   void addNewApplicant() async {
     var docRef = FirebaseFirestore.instance.collection('jobs').doc(widget.jobID);
 
-    docRef.update({
+    await docRef.update({
       'applicants': applicants + 1,
     });
     Navigator.pop(context);
@@ -510,6 +512,95 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                           ],
                         ),
                         dividerWidget(),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Card(
+                  color: Colors.black54,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        AnimatedSwitcher(
+                          duration: const Duration(
+                            milliseconds: 500,
+                          ),
+                          child: _isCommenting
+                              ? Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Flexible(
+                                      flex: 3,
+                                      child: TextField(
+                                        controller: _commentController,
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                        ),
+                                        maxLength: 200,
+                                        keyboardType: TextInputType.text,
+                                        maxLines: 6,
+                                        decoration: InputDecoration(
+                                          filled: true,
+                                          fillColor: Theme.of(context).scaffoldBackgroundColor,
+                                          enabledBorder: const UnderlineInputBorder(
+                                            borderSide: BorderSide(color: Colors.white),
+                                          ),
+                                          focusedBorder: const OutlineInputBorder(
+                                            borderSide: BorderSide(color: Colors.pink),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Flexible(
+                                      child: Column(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(horizontal: 8),
+                                            child: MaterialButton(
+                                              onPressed: () {},
+                                              color: Colors.blueAccent,
+                                              elevation: 0,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.circular(8),
+                                              ),
+                                              child: const Text(
+                                                'Post',
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          TextButton(
+                                            onPressed: () {},
+                                            child: const Text('Cancel'),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              : Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    IconButton(
+                                      onPressed: () {},
+                                      icon: Icon(
+                                        Icons.add_comment,
+                                        color: Colors.blueAccent,
+                                        size: 40,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                        ),
                       ],
                     ),
                   ),
