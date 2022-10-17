@@ -208,7 +208,7 @@ class _UploadJobNowState extends State<UploadJobNow> {
           'jobCategory': _jobCategoryController.text,
           'jobComments': [],
           'recruitment': true,
-          'createArt': Timestamp.now(),
+          'createAt': Timestamp.now(),
           'name': name,
           'userImage': userImage,
           'location': location,
@@ -243,22 +243,7 @@ class _UploadJobNowState extends State<UploadJobNow> {
     }
   }
 
-  void getMyData() async {
-    final DocumentSnapshot userDoc =
-        await FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser!.uid).get();
-    setState(() {
-      name = userDoc.get('name');
-      userImage = userDoc.get('userImage');
-      location = userDoc.get('location');
-    });
-  }
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    getMyData();
-  }
 
   @override
   Widget build(BuildContext context) {
