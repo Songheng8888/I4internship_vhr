@@ -85,7 +85,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
           CachedNetworkImage(
             imageUrl: loginUrlImage,
             placeholder: (context, url) => Image.asset(
-              'assets/images/wallpaper1.jpg',
+              'assets/images/wallpaper.jpg',
               fit: BoxFit.fill,
             ),
             errorWidget: (context, url, error) => const Icon(Icons.error),

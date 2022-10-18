@@ -108,7 +108,12 @@ class BottomNavigationBarForApp extends StatelessWidget {
         } else if (index == 2) {
           Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => UploadJobNow()));
         } else if (index == 3) {
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => ProfileScreen()));
+          final FirebaseAuth _auth = FirebaseAuth.instance;
+          final User? user = _auth.currentUser;
+          final String uid = user!.uid;
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => ProfileScreen(
+            userID: uid, 
+          )));
         } else if (index == 4) {
           _logOut(context);
         }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../search/profile_company.dart';
+
 class CommentWidget extends StatefulWidget {
   final String commentId;
   final String commenterId;
@@ -33,7 +35,10 @@ class _CommentWidgetState extends State<CommentWidget> {
   Widget build(BuildContext context) {
     _colors.shuffle();
     return InkWell(
-      onTap: (){},
+      onTap: () {
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => ProfileScreen(userID: widget.commenterId)));
+      },
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -56,7 +61,9 @@ class _CommentWidgetState extends State<CommentWidget> {
               ),
             ),
           ),
-          const SizedBox(width: 6,),
+          const SizedBox(
+            width: 6,
+          ),
           Flexible(
             flex: 5,
             child: Column(
@@ -68,7 +75,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                     fontStyle: FontStyle.normal,
                     fontWeight: FontWeight.bold,
                     color: Colors.grey,
-                    fontSize:16,
+                    fontSize: 16,
                   ),
                 ),
                 Text(
@@ -78,7 +85,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                     fontStyle: FontStyle.italic,
                     fontWeight: FontWeight.normal,
                     color: Colors.grey,
-                    fontSize:13,
+                    fontSize: 13,
                   ),
                 ),
               ],
