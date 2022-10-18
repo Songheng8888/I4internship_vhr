@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttericon/font_awesome_icons.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import 'package:vhr_project/user_state.dart';
 
 import '../widgets/bottom_nav_bar.dart';
@@ -27,6 +29,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   late DocumentSnapshot userDoc;
 
   void getUserData() async {
+    userDoc = await FirebaseFirestore.instance.collection('users').doc(widget.userID).get();
+    debugPrint(userDoc.get('name'));
     try {
       _isLoading = true;
       if (userDoc == null) {
@@ -49,6 +53,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         });
       }
     } catch (error) {
+      rethrow;
     } finally {
       _isLoading = false;
     }
@@ -86,13 +91,53 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
+  Widget _contactBy({required Color color, required Function fct, required IconData icon}) {
+    return CircleAvatar(
+      backgroundColor: color,
+      radius: 23,
+      child: CircleAvatar(
+        radius: 23,
+        backgroundColor: Colors.white,
+        child: IconButton(
+          icon: Icon(
+            icon,
+            color: color,
+          ),
+          onPressed: () {
+            fct();
+          },
+        ),
+      ),
+    );
+  }
+
+  void _openWhatAppChat() async {
+    var url = 'http://wa.me/$phoneNumber?text=Hello';
+    launchUrlString(url);
+  }
+
+  void _mailTo() async {
+    final Uri params = Uri(
+      scheme: 'mailto',
+      path: email,
+      query: 'subject=Write subject here, Please&body=Hello, please write details here',
+    );
+    final url = params.toString();
+    launchUrlString(url);
+  }
+
+  void _callPhoneNumber() async {
+    var url = 'tel://$phoneNumber';
+    launchUrlString(url);
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [Colors.deepOrange.shade300, Colors.blueAccent],
+          colors: [Colors.blueAccent.shade200, Colors.blueAccent.shade200],
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
           stops: const [0.2, 0.9],
@@ -178,15 +223,45 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   child: userInfo(icon: Icons.phone, content: phoneNumber),
                                 ),
                                 const SizedBox(
-                                  height: 25,
+                                  height: 15,
                                 ),
                                 const Divider(
                                   thickness: 1,
                                   color: Colors.white,
                                 ),
                                 const SizedBox(
-                                  height: 25,
+                                  height: 35,
                                 ),
+                                _isSameUser
+                                    ? Container()
+                                    : Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                        children: [
+                                          _contactBy(
+                                            color: Colors.green,
+                                            fct: () {
+                                              _openWhatAppChat();
+                                            },
+                                            icon: FontAwesome.whatsapp,
+                                          ),
+                                          _contactBy(
+                                            color: Colors.red,
+                                            fct: () {
+                                              _mailTo();
+                                            },
+                                            icon: Icons.mail_outline,
+                                          ),
+                                          _contactBy(
+                                            color: Colors.purple,
+                                            fct: () {
+                                              _callPhoneNumber();
+                                            },
+                                            icon: Icons.call,
+                                          ),
+                                        ],
+                                      ),
+
+
                                 !_isSameUser
                                     ? Container()
                                     : Center(
@@ -254,7 +329,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 image: DecorationImage(
                                   image: NetworkImage(
                                     imageUrl == ''
-                                        ? 'https://www.iconfinder.com/icons/2147887/avatar_photo_profile_user_icon'
+                                        ? 'https://cdn0.iconfinder.com/data/icons/seo-web-4-1/128/Vigor_User-Avatar-Profile-Photo-01-512.png'
                                         : imageUrl,
                                   ),
                                   fit: BoxFit.fill,

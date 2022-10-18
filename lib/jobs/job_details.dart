@@ -171,7 +171,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
           flexibleSpace: Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [Colors.deepOrange.shade300, Colors.blueAccent],
+                colors: [Colors.blueAccent.shade200, Colors.blueAccent.shade200],
                 begin: Alignment.centerLeft,
                 end: Alignment.centerRight,
                 stops: const [0.2, 0.9],
@@ -181,7 +181,6 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
           leading: IconButton(
             icon: const Icon(
               Icons.arrow_back,
-              size: 40,
               color: Colors.white,
             ),
             onPressed: () {
@@ -231,7 +230,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                                 image: DecorationImage(
                                     image: NetworkImage(
                                       userImageUrl == null
-                                          ? 'https://www.iconfinder.com/icons/2147887/avatar_photo_profile_user_icon'
+                                          ? 'https://cdn0.iconfinder.com/data/icons/seo-web-4-1/128/Vigor_User-Avatar-Profile-Photo-01-512.png'
                                           : userImageUrl!,
                                     ),
                                     fit: BoxFit.fill),

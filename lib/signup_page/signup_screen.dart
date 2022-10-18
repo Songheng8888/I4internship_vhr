@@ -183,7 +183,7 @@ class _SignUpState extends State<SignUp> with TickerProviderStateMixin {
           'name': _fullNameController.text,
           'email': _emailTextController.text,
           'userImage': imageUrl,
-          ' phoneNumber': _phoneNumberController.text,
+          'phoneNumber': _phoneNumberController.text,
           'location': _locationController.text
         };
         FirebaseFirestore.instance.collection('users').doc(_uid).set({

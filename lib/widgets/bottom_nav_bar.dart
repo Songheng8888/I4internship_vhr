@@ -85,7 +85,7 @@ class BottomNavigationBarForApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return CurvedNavigationBar(
       color: Colors.lightBlue.shade200,
-      backgroundColor: Colors.blueAccent,
+      backgroundColor: Colors.blueAccent.shade200,
       buttonBackgroundColor: Colors.deepOrange.shade300,
       height: 50,
       index: indexNum,
@@ -112,7 +112,7 @@ class BottomNavigationBarForApp extends StatelessWidget {
           final User? user = _auth.currentUser;
           final String uid = user!.uid;
           Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => ProfileScreen(
-            userID: uid, 
+            userID: uid,
           )));
         } else if (index == 4) {
           _logOut(context);
