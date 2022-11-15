@@ -260,8 +260,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           ),
                                         ],
                                       ),
-
-
                                 !_isSameUser
                                     ? Container()
                                     : Center(

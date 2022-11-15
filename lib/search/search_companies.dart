@@ -22,7 +22,7 @@ class _AllWorkersScreenState extends State<AllWorkersScreen> {
         hintText: 'Search for company or user...',
         border: InputBorder.none,
         hintStyle: TextStyle(
-          color: Colors.brown,
+          color: Colors.white54,
         ),
       ),
       style: const TextStyle(color: Colors.white, fontSize: 16.0),

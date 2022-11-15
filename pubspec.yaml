@@ -46,10 +46,13 @@ dependencies:
   cloud_firestore: ^3.4.6
   firebase_storage: ^10.3.7
   shared_preferences: ^2.0.15
+  dependencies:
+  flutter_launcher_icons: ^0.10.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -80,3 +83,8 @@ fonts:
   - family: Montserrat
     fonts:
       - asset: assets/fonts/ Montserrat.ttf
+
+# flutter_icons:
+#     android: "launcher_icon"
+#     ios: true
+#     image_path: "assets/images/VHR_logo.png"

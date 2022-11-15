@@ -21,7 +21,7 @@ class _SearchScreenState extends State<SearchScreen> {
         hintText: 'Search for jobs...',
         border: InputBorder.none,
         hintStyle: TextStyle(
-          color: Colors.brown,
+          color: Colors.white54,
         ),
       ),
       style: const TextStyle(color: Colors.white, fontSize: 16.0),
@@ -93,7 +93,7 @@ class _SearchScreenState extends State<SearchScreen> {
         body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
           stream: FirebaseFirestore.instance
               .collection('jobs')
-              .where('jbosTitle', isGreaterThanOrEqualTo: searchQuery)
+              .where('jobTitle', isGreaterThanOrEqualTo: searchQuery)
               .where('recruitment', isEqualTo: true)
               .snapshots(),
           builder: (context, AsyncSnapshot snapshot) {
